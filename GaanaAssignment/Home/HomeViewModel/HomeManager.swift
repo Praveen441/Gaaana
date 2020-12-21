@@ -20,7 +20,7 @@ class HomeManager: HomeManagerProtocol {
     }
     
     func fetchResponse(completion: @escaping HomeCompletionClosure) {
-        guard let sectionsInDB = sectionRespository?.getAll(), !sectionsInDB.isEmpty else {
+        guard let sectionsInDB = sectionRespository?.getAllSection(), !sectionsInDB.isEmpty else {
             fetchResponseFromNetwork { [weak self] (successResponse) in
                 switch successResponse {
                 case .success(let response):

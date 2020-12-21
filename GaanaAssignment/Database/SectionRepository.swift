@@ -11,15 +11,22 @@ protocol SectionRepositoryProtocol: BaseRepositoryProtocol {}
 
 class SectionRespository: SectionRepositoryProtocol {
 
-    typealias T = Section
+    typealias T = CDSection
     
-    func getAll() -> [Section]? {
+    func getAll() -> [CDSection]? {
+        return PersistentStorage.sharedInstance.fetchManagedObject(managedObjectType: CDSection.self)
+    }
+    
+    func getAllSection() -> [Section] {
+        let allSections = getAll()
         var sections = [Section]()
-        let response = PersistentStorage.sharedInstance.fetchManagedObject(managedObjectType: CDSection.self)
-        response?.forEach({ (section) in
+        allSections?.forEach({ (section) in
             sections.append(section.convertToSection())
         })
         return sections
+    }
+    
+    func saveAll(records: [CDSection]) {
     }
     
     func saveAll(records: [Section]) {
@@ -43,7 +50,7 @@ class SectionRespository: SectionRepositoryProtocol {
         PersistentStorage.sharedInstance.saveContext()
     }
     
-    func getRecord(by id: String) -> Section? {
+    func getRecord(by id: String) -> CDSection? {
         return nil
     }
     
@@ -51,11 +58,11 @@ class SectionRespository: SectionRepositoryProtocol {
         return true
     }
     
-    func update(record: Section) {
+    func update(record: CDSection) {
         return
     }
     
-    func create(record: Section) -> Bool {
+    func create(record: CDSection) -> Bool {
         return true
     }
 }
