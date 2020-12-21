@@ -11,23 +11,17 @@ protocol PlaylistRepositoryProtocol: BaseRepositoryProtocol {}
 
 class PlaylistRepository: PlaylistRepositoryProtocol {
     
-    typealias T = Playlist
+    typealias T = CDPlaylist
     
-    func getAll() -> [Playlist]? {
-        let allCDPlaylists = PersistentStorage.sharedInstance.fetchManagedObject(managedObjectType: CDPlaylist.self)
-        var allPlaylists = [Playlist]()
-        
-        allCDPlaylists?.forEach({ (cdPlaylist) in
-            allPlaylists.append(cdPlaylist.convertToPlaylist())
-        })
-        return allPlaylists
+    func getAll() -> [CDPlaylist]? {
+        return PersistentStorage.sharedInstance.fetchManagedObject(managedObjectType: CDPlaylist.self)
     }
     
-    func getRecord(by id: String) -> Playlist? {
+    func getRecord(by id: String) -> CDPlaylist? {
         let predicate = NSPredicate(format: "\(Constants.CoreDataAttributes.playlistName) == %@", id)
         let cdPlaylists = PersistentStorage.sharedInstance.fetchManagedObject(predicate: predicate, managedObjectType: CDPlaylist.self)
         if let cdPlaylists = cdPlaylists, !cdPlaylists.isEmpty {
-            return cdPlaylists.first?.convertToPlaylist()
+            return cdPlaylists.first
         }
         return nil
     }
@@ -42,6 +36,22 @@ class PlaylistRepository: PlaylistRepositoryProtocol {
         return deleteRecord(for: name)
     }
     
+    func update(record: CDPlaylist) {
+    }
+    
+    func create(record: CDPlaylist) -> Bool {
+        guard let _ = record.name else {return false}
+        PersistentStorage.sharedInstance.saveContext()
+        return true
+    }
+    
+    func create(playlist name: String) -> Bool {
+        guard !playlistExists(name: name) else {return false}
+        let cdPlaylist = CDPlaylist(context: PersistentStorage.sharedInstance.context)
+        cdPlaylist.name = name
+        return create(record: cdPlaylist)
+    }
+    
     func delete(track: Track, from playlist: Playlist) -> Bool {
         guard let name = playlist.name, let trackId = track.trackId else {return false}
         let predicate = NSPredicate(format: "\(Constants.CoreDataAttributes.playlistName) == %@", name)
@@ -49,54 +59,47 @@ class PlaylistRepository: PlaylistRepositoryProtocol {
         if let cdPlaylists = cdPlaylists, !cdPlaylists.isEmpty {
             let cdPlaylist = cdPlaylists.first
             guard let cdTracks = cdPlaylist?.tracks, !cdTracks.isEmpty else {return false}
-            let newCDTracks = cdTracks.filter {$0.trackId != trackId}
-            cdPlaylist?.tracks = newCDTracks
+            guard let trackToDelete = (cdTracks.filter {$0.trackId == trackId}).first else {return false}
+            cdPlaylist?.tracks?.remove(trackToDelete)
             PersistentStorage.sharedInstance.saveContext()
             return true
         }
         return false
     }
     
-    func update(record: Playlist) {
-        guard let name = record.name else {return}
-        let predicate = NSPredicate(format: "\(Constants.CoreDataAttributes.playlistName) == %@", name)
-        let cdPlaylists = PersistentStorage.sharedInstance.fetchManagedObject(predicate: predicate, managedObjectType: CDPlaylist.self)
-        if let cdPlaylists = cdPlaylists, !cdPlaylists.isEmpty {
-            let recordToUpdate = cdPlaylists.first
-            recordToUpdate?.tracks = getCDTracks(tracks: record.tracks)
-        }
-        PersistentStorage.sharedInstance.saveContext()
+    func getAllPlayllists() -> [Playlist] {
+        let allPlaylists = getAll()
+        var playlists = [Playlist]()
+        
+        allPlaylists?.forEach({ (cdPlaylist) in
+            playlists.append(cdPlaylist.convertToPlaylist())
+        })
+        return playlists
     }
     
     func add(track: Track, toPlaylist: Playlist) -> Bool {
         /// If playlist is found then procedd else return
-        guard let name = toPlaylist.name, var existingPlaylist = getRecord(by: name) else {return false}
+        guard let name = toPlaylist.name, let trackId = track.trackId, let existingPlaylist = getRecord(by: name) else {return false}
         /// If track already exists in the playlist then return else add in the playlist
         guard !trackExistsIn(playlist: existingPlaylist, track: track) else {return false}
-        var trackObj = track
-        trackObj.date = Date()
-        existingPlaylist.tracks.append(trackObj)
-        update(record: existingPlaylist)
-        return true
-    }
-    
-    func create(record: Playlist) -> Bool {
-        guard let name = record.name, !playlistExists(name: name) else {return false}
-        let cdPlaylist = CDPlaylist(context: PersistentStorage.sharedInstance.context)
-        cdPlaylist.name = record.name
-        if !record.tracks.isEmpty {
-            cdPlaylist.tracks = getCDTracks(tracks: record.tracks)
+        //// fetch track and set its playlist
+        let predicate = NSPredicate(format: "\(Constants.CoreDataAttributes.trackId) == %@", trackId)
+        let cdTracks = PersistentStorage.sharedInstance.fetchManagedObject(predicate: predicate, managedObjectType: CDTrack.self)
+        if let cdTrack = cdTracks?.first {
+            cdTrack.date = Date()
+            cdTrack.playlist?.insert(existingPlaylist)
+            PersistentStorage.sharedInstance.saveContext()
+            return true
         }
-        PersistentStorage.sharedInstance.saveContext()
-        return true
+        return false
     }
     
-    func saveAll(records: [Playlist]) {
+    func saveAll(records: [CDPlaylist]) {
         return
     }
     
-    private func trackExistsIn(playlist: Playlist, track: Track) -> Bool {
-        let found = playlist.tracks.filter { (playlisttrack) -> Bool in
+    private func trackExistsIn(playlist: CDPlaylist, track: Track) -> Bool {
+        let found = playlist.tracks?.filter { (playlisttrack) -> Bool in
             return playlisttrack.trackId == track.trackId
         }.first
         
@@ -104,20 +107,6 @@ class PlaylistRepository: PlaylistRepositoryProtocol {
             return true
         }
         return false
-    }
-    
-    private func getCDTracks(tracks: [Track]) -> Set<CDTrack> {
-        var cdTracks = Set<CDTrack>()
-        
-        tracks.forEach { (track) in
-            let cdTrack = CDTrack(context: PersistentStorage.sharedInstance.context)
-            cdTrack.name = track.name
-            cdTrack.trackId = track.trackId
-            cdTrack.imageUrl = track.imageUrl
-            cdTrack.date = track.date
-            cdTracks.insert(cdTrack)
-        }
-        return cdTracks
     }
     
     private func playlistExists(name: String) -> Bool {

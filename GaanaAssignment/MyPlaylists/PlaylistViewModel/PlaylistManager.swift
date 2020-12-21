@@ -18,14 +18,14 @@ class PlaylistManager: PlaylistManagerProtocol {
     }
     
     func savePlaylist(playlist: Playlist) -> Bool {
-        if let repository = playlistRepository {
-            return repository.create(record: playlist)
+        if let repository = playlistRepository, let name = playlist.name {
+            return repository.create(playlist: name)
         }
         return false
     }
     
     func fetchAllPlaylists() -> [Playlist] {
-        return playlistRepository?.getAll() ?? []
+        return playlistRepository?.getAllPlayllists() ?? []
     }
     
     func add(track: Track, playlist: Playlist) -> Bool {
