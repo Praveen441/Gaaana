@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H114" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDPlaylist" representedClassName=".CDPlaylist" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDTrack" inverseName="playlistRelationship" inverseEntity="CDTrack"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDTrack" inverseName="playlist" inverseEntity="CDTrack"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
@@ -11,19 +11,19 @@
     </entity>
     <entity name="CDSection" representedClassName=".CDSection" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDTrack" inverseName="sectionRelationShip" inverseEntity="CDTrack"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDTrack" inverseName="section" inverseEntity="CDTrack"/>
     </entity>
     <entity name="CDTrack" representedClassName=".CDTrack" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="trackId" optional="YES" attributeType="String"/>
-        <relationship name="playlistRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPlaylist" inverseName="tracks" inverseEntity="CDPlaylist"/>
-        <relationship name="sectionRelationShip" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSection" inverseName="tracks" inverseEntity="CDSection"/>
+        <relationship name="playlist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPlaylist" inverseName="tracks" inverseEntity="CDPlaylist"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSection" inverseName="tracks" inverseEntity="CDSection"/>
     </entity>
     <elements>
-        <element name="CDPlaylist" positionX="-45" positionY="45" width="128" height="73"/>
-        <element name="CDSection" positionX="-54" positionY="18" width="128" height="73"/>
-        <element name="CDTrack" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="CDPlaylist" positionX="152.88671875" positionY="140.30859375" width="128" height="73"/>
+        <element name="CDSection" positionX="-351.26171875" positionY="134.91015625" width="128" height="73"/>
+        <element name="CDTrack" positionX="-103.4296875" positionY="-36.77734375" width="128" height="133"/>
     </elements>
 </model>

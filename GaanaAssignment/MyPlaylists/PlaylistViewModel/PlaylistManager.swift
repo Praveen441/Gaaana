@@ -43,8 +43,8 @@ class PlaylistManager: PlaylistManagerProtocol {
     }
     
     func delete(track: Track, from playlist: Playlist) -> Bool {
-        if let respository = playlistRepository {
-            return respository.delete(track: track, from: playlist)
+        if let repository = playlistRepository {
+            return repository.delete(track: track, from: playlist)
         }
         return false
     }

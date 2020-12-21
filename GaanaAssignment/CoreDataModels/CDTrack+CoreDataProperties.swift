@@ -16,29 +16,29 @@ extension CDTrack {
         return NSFetchRequest<CDTrack>(entityName: "CDTrack")
     }
 
+    @NSManaged public var date: Date?
     @NSManaged public var imageUrl: String?
     @NSManaged public var name: String?
     @NSManaged public var trackId: String?
-    @NSManaged public var date: Date?
-    @NSManaged public var playlistRelationship: Set<CDPlaylist>?
-    @NSManaged public var sectionRelationShip: CDSection?
+    @NSManaged public var playlist: Set<CDPlaylist>?
+    @NSManaged public var section: CDSection?
 
 }
 
-// MARK: Generated accessors for playlistRelationship
+// MARK: Generated accessors for playlist
 extension CDTrack {
 
-    @objc(addPlaylistRelationshipObject:)
-    @NSManaged public func addToPlaylistRelationship(_ value: CDPlaylist)
+    @objc(addPlaylistObject:)
+    @NSManaged public func addToPlaylist(_ value: CDPlaylist)
 
-    @objc(removePlaylistRelationshipObject:)
-    @NSManaged public func removeFromPlaylistRelationship(_ value: CDPlaylist)
+    @objc(removePlaylistObject:)
+    @NSManaged public func removeFromPlaylist(_ value: CDPlaylist)
 
-    @objc(addPlaylistRelationship:)
-    @NSManaged public func addToPlaylistRelationship(_ values: Set<CDPlaylist>)
+    @objc(addPlaylist:)
+    @NSManaged public func addToPlaylist(_ values: Set<CDPlaylist>)
 
-    @objc(removePlaylistRelationship:)
-    @NSManaged public func removeFromPlaylistRelationship(_ values: Set<CDPlaylist>)
+    @objc(removePlaylist:)
+    @NSManaged public func removeFromPlaylist(_ values: Set<CDPlaylist>)
 
 }
 

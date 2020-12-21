@@ -10,7 +10,7 @@ import Foundation
 extension CDPlaylist {
     
     func convertToPlaylist() -> Playlist {
-        return Playlist(name: name, tracks: convertToTrackCellVM(tracks: tracks))
+        return Playlist(name: name, tracks: convertToTrackCellVM(tracks: tracks as? Set<CDTrack>))
     }
     
     func convertToTrackCellVM(tracks: Set<CDTrack>?) -> [Track] {
