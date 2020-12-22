@@ -11,7 +11,7 @@ class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var homeCollectionList: UICollectionView!
     
-    var trackCellVM: [TrackCellViewModel]?
+    var sectionCellVM: SectionCellViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,14 +47,14 @@ class HomeTableViewCell: UITableViewCell {
 
 extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trackCellVM?.count ?? 0
+        return sectionCellVM?.tracks.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.description(), for: indexPath) as? HomeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configureCell(trackVM: trackCellVM?[indexPath.item])
+        cell.configureCell(trackVM: sectionCellVM?.tracks[indexPath.row])
         return cell
     }
 }

@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return homeVM.homeCellVMs.count
+        return homeVM.sectionCellVMs.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,8 +66,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                                                        for: indexPath) as? HomeTableViewCell else {
             return UITableViewCell()
         }
-        let sectionTracks = homeVM.homeCellVMs[indexPath.section].tracks
-        cell.trackCellVM = sectionTracks
+        cell.sectionCellVM = homeVM.sectionCellVMs[indexPath.section]
         return cell
     }
     
@@ -80,7 +79,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeSectionHeaderView.description())
                 as? HomeSectionHeaderView else {return nil}
         header.delegate = self
-        header.configureView(name: homeVM.homeCellVMs[section].name, section: section)
+        header.configureView(sectionCellVM: homeVM.sectionCellVMs[section], section: section)
         return header
     }
     

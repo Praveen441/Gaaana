@@ -11,9 +11,8 @@ typealias homeReponseStatusCompletion = (_ status: Bool, _ error: String?) -> Vo
 
 class HomeViewModel {
     
-    var sections: [Section] = []
     var homeManager: HomeManagerProtocol?
-    var homeCellVMs = [SectionCellViewModel]()
+    var sectionCellVMs = [SectionCellViewModel]()
     
     init(homeManager: HomeManagerProtocol) {
         self.homeManager = homeManager
@@ -23,8 +22,7 @@ class HomeViewModel {
         homeManager?.fetchResponse { [weak self] response in
             switch response {
             case .success(let response):
-                self?.sections = response
-                self?.createCellViewModel()
+                self?.createCellViewModel(sections: response)
                 completion(true, nil)
             case .failure(let error):
                 debugPrint("error receiving tracks \(error.decription)")
@@ -34,32 +32,22 @@ class HomeViewModel {
     }
     
     func numberOfSections() -> Int {
-        return homeCellVMs.count
+        return sectionCellVMs.count
     }
     
     func numberOfRows(in section: Int) -> Int {
         return 1
     }
     
-    func createCellViewModel() {
-        sections.forEach { (section) in
-            let tracks = getTrackCellVMs(for: section.tracks)
-            let sectionCellVM = SectionCellViewModel(name: section.name ?? "", tracks: tracks)
-            homeCellVMs.append(sectionCellVM)
-        }
+    func createCellViewModel(sections: [Section]) {
+        sectionCellVMs = sections.map { SectionCellViewModel(name: $0.name, tracks: getTrackCellVMs(for: $0.tracks)) }
     }
     
     func getTrackCellVMs(for tracks: [Track]?) -> [TrackCellViewModel] {
-        var trackCellVMs = [TrackCellViewModel]()
-        
-        tracks?.forEach({ (track) in
-            let trackCellVM = TrackCellViewModel(name: track.name ?? "", trackId: track.trackId ?? "", imageUrl: track.imageUrl ?? "")
-            trackCellVMs.append(trackCellVM)
-        })
-        return trackCellVMs
+        return tracks?.map { TrackCellViewModel(name: $0.name, trackId: $0.trackId, imageUrl: $0.imageUrl)} ?? []
     }
     
-    func getTracksForSection(index: Int) -> [TrackCellViewModel] {
-        return homeCellVMs[index].tracks
+    func getTracksFor(section: Int) -> [TrackCellViewModel] {
+        return sectionCellVMs[section].tracks
     }
 }

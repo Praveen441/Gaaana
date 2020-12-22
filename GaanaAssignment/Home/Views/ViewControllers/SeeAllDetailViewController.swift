@@ -29,7 +29,7 @@ class SeeAllDetailViewController: UIViewController {
         tracksList.tableFooterView = UIView()
         tabBarController?.tabBar.tintColor = .red
         guard let homeVM = homeVM, let section = selectedHomeSection else {return}
-        title = homeVM.homeCellVMs[section].name
+        title = homeVM.sectionCellVMs[section].name
     }
     
     private func getAddToPlaylistVC() -> AddToPlaylistViewController? {
@@ -47,7 +47,7 @@ extension SeeAllDetailViewController: UITableViewDataSource, UITableViewDelegate
         guard let homeVM = homeVM, let selectedSection = selectedHomeSection else {
             return 0
         }
-        return homeVM.homeCellVMs[selectedSection].tracks.count
+        return homeVM.sectionCellVMs[selectedSection].tracks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,7 +55,7 @@ extension SeeAllDetailViewController: UITableViewDataSource, UITableViewDelegate
                                                        for: indexPath) as? TrackTableViewCell else {
             return UITableViewCell()
         }
-        if let section = selectedHomeSection, let alltracks = homeVM?.getTracksForSection(index: section) {
+        if let section = selectedHomeSection, let alltracks = homeVM?.getTracksFor(section: section) {
             cell.configureCell(trackVM: alltracks[indexPath.row])
         }
         cell.delegate = self
@@ -73,7 +73,7 @@ extension SeeAllDetailViewController: TrackTableViewCellProtocol {
         
             if let homeVM = homeVM, let selectedHomeSection = selectedHomeSection,
                let selectedCellIndex = tracksList.indexPath(for: cell) {
-                let sectionTracks = homeVM.homeCellVMs[selectedHomeSection].tracks
+                let sectionTracks = homeVM.sectionCellVMs[selectedHomeSection].tracks
                 vc.track = sectionTracks[selectedCellIndex.row]
             }
             let navVC = UINavigationController(rootViewController: vc)

@@ -27,8 +27,8 @@ class HomeSectionHeaderView: UITableViewHeaderFooterView {
         return "HomeSectionHeaderView"
     }
     
-    func configureView(name: String?, section: Int) {
-        title.text = name ?? ""
+    func configureView(sectionCellVM: SectionCellViewModel, section: Int) {
+        title.text = sectionCellVM.name ?? ""
         sectionIndex = section
     }
     
