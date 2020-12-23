@@ -24,7 +24,11 @@ class HomeCollectionViewCell: UICollectionViewCell {
     func configureCell(trackVM: TrackCellViewModel?) {
         trackName.text = trackVM?.name
         guard let imgURL = trackVM?.imageUrl else {return}
-        trackImage.setImage(urlString: imgURL)
+        trackImage.getImage(urlString: imgURL) { [weak self] (url, image) in
+            if url == imgURL {
+                self?.trackImage.image = image
+            }
+        }
     }
 
 }

@@ -23,12 +23,11 @@ extension UIImageView {
     /// is used to download the images from the server using the URL and stores them in the NSCache
     /// object and returns if the same image is requested
     /// - Parameter urlString: url of the image to be downloaded
-    public func setImage(urlString: String) {
+    public func getImage(urlString: String, completion: @escaping (_ imgUrl: String, _ image: UIImage) -> Void) {
         self.image = nil
         
         if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) {
-            self.image = imageFromCache
-            return
+            completion(urlString, imageFromCache)
         }
         
         URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL,
@@ -40,10 +39,9 @@ extension UIImageView {
             if let data = data {
                 DispatchQueue.main.async(execute: { () -> Void in
                     if let image = UIImage(data: data) {
-                        imageCache.setObject(image, forKey: urlString as AnyObject)
-                        self.image = image
+                        completion(urlString, image)
                     } else {
-                        self.image = UIImage(named: "Some dummy image")
+                        completion(urlString, UIImage(named: "Some dummy image") ?? UIImage())
                     }
                 })
             }

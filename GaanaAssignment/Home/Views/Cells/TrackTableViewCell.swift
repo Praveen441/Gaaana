@@ -36,7 +36,11 @@ class TrackTableViewCell: UITableViewCell {
     func configureCell(trackVM: TrackCellViewModel) {
         trackName.text = trackVM.name
         guard let imgUrl = trackVM.imageUrl else {return}
-        trackIcon.setImage(urlString: imgUrl)
+        trackIcon.getImage(urlString: imgUrl) { [weak self] (url, image) in
+            if url == imgUrl {
+                self?.trackIcon.image = image
+            }
+        }
     }
     
     @IBAction func addToPlaylistAction(_ sender: UIButton) {

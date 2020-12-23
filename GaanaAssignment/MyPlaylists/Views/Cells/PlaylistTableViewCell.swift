@@ -36,7 +36,11 @@ class PlaylistTableViewCell: UITableViewCell {
             playlistIcon.image = nil
             return
         }
-        playlistIcon.setImage(urlString: imgUrl)
+        playlistIcon.getImage(urlString: imgUrl) { [weak self] (url, image) in
+            if url == imgUrl {
+                self?.playlistIcon.image = image
+            }
+        }
     }
     
     @IBAction func selectPlaylistBtnClicked(_ sender: UIButton) {
