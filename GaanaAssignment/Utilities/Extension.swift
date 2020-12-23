@@ -24,10 +24,10 @@ extension UIImageView {
     /// object and returns if the same image is requested
     /// - Parameter urlString: url of the image to be downloaded
     public func getImage(urlString: String, completion: @escaping (_ imgUrl: String, _ image: UIImage) -> Void) {
-        self.image = nil
-        
+    
         if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) {
             completion(urlString, imageFromCache)
+            return
         }
         
         URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL,

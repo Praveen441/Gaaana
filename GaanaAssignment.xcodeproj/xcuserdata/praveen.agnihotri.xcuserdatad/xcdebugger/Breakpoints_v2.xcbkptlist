@@ -3,4 +3,102 @@
    uuid = "A93DE0E7-E66F-42BF-8449-F683ACC88A12"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D442587-8CAF-480A-B7DD-3BFECABC2374"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GaanaAssignment/Network/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "fetchDataWithURLRequest(request:decodingType:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A32DB61-4AAD-48E6-96FC-4CF97556EBD8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GaanaAssignment/Network/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "getRequest(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5FF5AB15-FEFF-45F8-A06C-52342302D9C5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GaanaAssignment/Network/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "getRequest(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4D1C286-47C3-46CF-9768-2A7902D8B21B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GaanaAssignment/Network/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "fetchDataWithURLRequest(request:decodingType:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E4D1C286-47C3-46CF-9768-2A7902D8B21B - f72710153db9da53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GaanaAssignment.NetworkManager.fetchDataWithURLRequest&lt;A where A: Swift.Decodable&gt;(request: GaanaAssignment.RequestProtocol, decodingType: A.Type, completion: (Swift.Result&lt;Swift.Decodable, GaanaAssignment.GaanaError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GaanaAssignment"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/praveen.agnihotri/Desktop/GaanaAssignment/GaanaAssignment/Network/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "423">
+               </Location>
+               <Location
+                  uuid = "E4D1C286-47C3-46CF-9768-2A7902D8B21B - 9346c300c08249a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in GaanaAssignment.NetworkManager.fetchDataWithURLRequest&lt;A where A: Swift.Decodable&gt;(request: GaanaAssignment.RequestProtocol, decodingType: A.Type, completion: (Swift.Result&lt;Swift.Decodable, GaanaAssignment.GaanaError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "GaanaAssignment"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/praveen.agnihotri/Desktop/GaanaAssignment/GaanaAssignment/Network/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "338">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

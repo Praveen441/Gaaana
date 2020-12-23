@@ -29,8 +29,7 @@
 		8C773EC9258D19EB007EA64E /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773EC8258D19EB007EA64E /* HomeSectionHeaderView.swift */; };
 		8C773ED4258D233F007EA64E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773ED3258D233F007EA64E /* HomeViewModel.swift */; };
 		8C773EDC258D269E007EA64E /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773EDB258D269E007EA64E /* HomeManager.swift */; };
-		8C773EE4258D37E0007EA64E /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773EE3258D37E0007EA64E /* RequestManager.swift */; };
-		8C773EEA258D385B007EA64E /* RequestMaangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773EE9258D385B007EA64E /* RequestMaangerProtocol.swift */; };
+		8C773EEA258D385B007EA64E /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773EE9258D385B007EA64E /* RequestProtocol.swift */; };
 		8C773F06258DD43E007EA64E /* HomeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773F05258DD43E007EA64E /* HomeManagerProtocol.swift */; };
 		8C773F0C258DD5A2007EA64E /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C773F0A258DD5A2007EA64E /* PlaylistTableViewCell.swift */; };
 		8C773F0D258DD5A2007EA64E /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C773F0B258DD5A2007EA64E /* PlaylistTableViewCell.xib */; };
@@ -60,6 +59,7 @@
 		8C7740812590DFB3007EA64E /* CDPlaylist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77407B2590DFB3007EA64E /* CDPlaylist+CoreDataProperties.swift */; };
 		8C7740822590DFB3007EA64E /* CDSection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77407C2590DFB3007EA64E /* CDSection+CoreDataClass.swift */; };
 		8C7740832590DFB3007EA64E /* CDSection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77407D2590DFB3007EA64E /* CDSection+CoreDataProperties.swift */; };
+		8C7740C325936CEA007EA64E /* HomeRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7740C225936CEA007EA64E /* HomeRequestManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,8 +108,7 @@
 		8C773EC8258D19EB007EA64E /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		8C773ED3258D233F007EA64E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8C773EDB258D269E007EA64E /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
-		8C773EE3258D37E0007EA64E /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
-		8C773EE9258D385B007EA64E /* RequestMaangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMaangerProtocol.swift; sourceTree = "<group>"; };
+		8C773EE9258D385B007EA64E /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		8C773F05258DD43E007EA64E /* HomeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManagerProtocol.swift; sourceTree = "<group>"; };
 		8C773F0A258DD5A2007EA64E /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		8C773F0B258DD5A2007EA64E /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
@@ -139,6 +138,7 @@
 		8C77407B2590DFB3007EA64E /* CDPlaylist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlaylist+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C77407C2590DFB3007EA64E /* CDSection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSection+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8C77407D2590DFB3007EA64E /* CDSection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSection+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8C7740C225936CEA007EA64E /* HomeRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRequestManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,8 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				8C773E95258CF76C007EA64E /* NetworkManager.swift */,
-				8C773EE3258D37E0007EA64E /* RequestManager.swift */,
-				8C773EE9258D385B007EA64E /* RequestMaangerProtocol.swift */,
+				8C773EE9258D385B007EA64E /* RequestProtocol.swift */,
 				8C773EA0258CF9AD007EA64E /* GaanaError.swift */,
 			);
 			path = Network;
@@ -280,6 +279,7 @@
 				8C773ED3258D233F007EA64E /* HomeViewModel.swift */,
 				8C773EDB258D269E007EA64E /* HomeManager.swift */,
 				8C773F05258DD43E007EA64E /* HomeManagerProtocol.swift */,
+				8C7740C225936CEA007EA64E /* HomeRequestManager.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -534,10 +534,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C773EE4258D37E0007EA64E /* RequestManager.swift in Sources */,
 				8C773F78258E3D80007EA64E /* CDSections+Extension.swift in Sources */,
 				8C773FEE258FBD32007EA64E /* PlaylistCellViewModel.swift in Sources */,
 				8C773E96258CF76C007EA64E /* NetworkManager.swift in Sources */,
+				8C7740C325936CEA007EA64E /* HomeRequestManager.swift in Sources */,
 				8C773EA1258CF9AD007EA64E /* GaanaError.swift in Sources */,
 				8C774009258FC18A007EA64E /* PlaylistRepository.swift in Sources */,
 				8C773FCD258F62FA007EA64E /* PlaylistManager.swift in Sources */,
@@ -568,7 +568,7 @@
 				8C773EB9258D1548007EA64E /* MyPlaylistsViewController.swift in Sources */,
 				8C773F36258E2507007EA64E /* Extension.swift in Sources */,
 				8C773E3F258CDBC0007EA64E /* AppDelegate.swift in Sources */,
-				8C773EEA258D385B007EA64E /* RequestMaangerProtocol.swift in Sources */,
+				8C773EEA258D385B007EA64E /* RequestProtocol.swift in Sources */,
 				8C773F12258DE06B007EA64E /* SeeAllDetailViewController.swift in Sources */,
 				8C77400E258FC1AC007EA64E /* SectionRepository.swift in Sources */,
 				8C773FF6258FBD7E007EA64E /* TrackCellViewModel.swift in Sources */,

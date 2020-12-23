@@ -32,6 +32,10 @@ class HomeSectionHeaderView: UITableViewHeaderFooterView {
         sectionIndex = section
     }
     
+    override func prepareForReuse() {
+        title.text = nil
+    }
+    
     @IBAction func seeAllAction(_ sender: UIButton) {
         delegate?.seeAllActionClicked(sectionIndex: sectionIndex)
     }

@@ -40,9 +40,7 @@ class HomeManager: HomeManagerProtocol {
     }
     
     func fetchResponseFromNetwork(completion: @escaping completionClosure) {
-        let requestInstance = RequestManager(httpMethod: HTTPMethod.GET, requestBody: nil, path: APIEndPoints.tracks.rawValue)
-        guard let request = requestInstance.request else {return}
-        networkManager?.fetchDataWithURLRequest(request: request, decodingType: Response.self, completion: { (response) in
+        networkManager?.fetchDataWithURLRequest(request: APIEndPoints.tracks, decodingType: Response.self, completion: { (response) in
             completion(response)
         })
     }

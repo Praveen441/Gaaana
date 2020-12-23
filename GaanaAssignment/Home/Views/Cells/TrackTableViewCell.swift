@@ -43,6 +43,11 @@ class TrackTableViewCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        trackIcon.image = nil
+        trackName.text = nil
+    }
+    
     @IBAction func addToPlaylistAction(_ sender: UIButton) {
         delegate?.addToPlaylist(cell: self)
     }

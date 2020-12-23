@@ -43,6 +43,11 @@ class PlaylistTableViewCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        playlistIcon.image = nil
+        playlistName.text = nil
+    }
+    
     @IBAction func selectPlaylistBtnClicked(_ sender: UIButton) {
     }
 }

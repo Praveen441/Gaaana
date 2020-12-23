@@ -10,7 +10,7 @@ import Foundation
 typealias completionClosure = (Result<Decodable, GaanaError>) -> Void
 
 protocol NetworkManagerProtocol: class {
-    func fetchDataWithURLRequest<T: Decodable>(request: URLRequest,
+    func fetchDataWithURLRequest<T: Decodable>(request: RequestProtocol,
                                                decodingType: T.Type,
                                                completion: @escaping completionClosure)
 }
@@ -27,12 +27,14 @@ class NetworkManager: NetworkManagerProtocol {
         return configuration
     }()
     
-    func fetchDataWithURLRequest<T: Decodable>(request: URLRequest,
+    func fetchDataWithURLRequest<T: Decodable>(request: RequestProtocol,
                                                decodingType: T.Type,
                                                completion: @escaping completionClosure) {
+    
+        guard let request = getRequest(request: request) else {return}
         
         let task = session.dataTask(with: request) { [weak self] (data, response, error) in
-            guard let response = response as? HTTPURLResponse else {
+            guard let _ = response as? HTTPURLResponse else {
                 completion(.failure(.serverError))
                 return
             }
@@ -56,6 +58,24 @@ class NetworkManager: NetworkManagerProtocol {
             }
         }
         task.resume()
+    }
+    
+    private func getRequest(request: RequestProtocol) -> URLRequest? {
+        guard let baseUrl = request.baseURL,
+              let stringUrl = baseUrl.appendingPathComponent(request.path).absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: stringUrl) else {return nil}
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.httpMethod.rawValue
+        
+        if let body = request.requestBody {
+            urlRequest.httpBody = body
+        }
+        
+        for key in request.headers.keys {
+            urlRequest.setValue(request.headers[key], forHTTPHeaderField: key)
+        }
+        return urlRequest
     }
     
     private func parseResponse<T: Decodable>(response: Data, type: T.Type, completion: completionClosure) {

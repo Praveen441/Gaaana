@@ -31,4 +31,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    override func prepareForReuse() {
+        trackName.text = nil
+        trackImage.image = nil
+    }
 }
