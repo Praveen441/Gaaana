@@ -60,6 +60,7 @@
 		8C7740822590DFB3007EA64E /* CDSection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77407C2590DFB3007EA64E /* CDSection+CoreDataClass.swift */; };
 		8C7740832590DFB3007EA64E /* CDSection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77407D2590DFB3007EA64E /* CDSection+CoreDataProperties.swift */; };
 		8C7740C325936CEA007EA64E /* HomeRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7740C225936CEA007EA64E /* HomeRequestManager.swift */; };
+		8C7740CB2593BA7B007EA64E /* ImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7740CA2593BA7B007EA64E /* ImageDownloadManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		8C77407C2590DFB3007EA64E /* CDSection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSection+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8C77407D2590DFB3007EA64E /* CDSection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C7740C225936CEA007EA64E /* HomeRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRequestManager.swift; sourceTree = "<group>"; };
+		8C7740CA2593BA7B007EA64E /* ImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 			children = (
 				8C773E3E258CDBC0007EA64E /* AppDelegate.swift */,
 				8C773E40258CDBC0007EA64E /* SceneDelegate.swift */,
+				8C7740CA2593BA7B007EA64E /* ImageDownloadManager.swift */,
 				8C773EB3258D10FE007EA64E /* Constants.swift */,
 				8C773F35258E2507007EA64E /* Extension.swift */,
 			);
@@ -569,6 +572,7 @@
 				8C773F36258E2507007EA64E /* Extension.swift in Sources */,
 				8C773E3F258CDBC0007EA64E /* AppDelegate.swift in Sources */,
 				8C773EEA258D385B007EA64E /* RequestProtocol.swift in Sources */,
+				8C7740CB2593BA7B007EA64E /* ImageDownloadManager.swift in Sources */,
 				8C773F12258DE06B007EA64E /* SeeAllDetailViewController.swift in Sources */,
 				8C77400E258FC1AC007EA64E /* SectionRepository.swift in Sources */,
 				8C773FF6258FBD7E007EA64E /* TrackCellViewModel.swift in Sources */,

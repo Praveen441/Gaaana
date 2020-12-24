@@ -8,20 +8,20 @@
 import UIKit
 
 class PlaylistTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var playlistIcon: UIImageView!
     @IBOutlet weak var playlistName: UILabel!
     @IBOutlet weak var selectPlaylistBtn: UIButton!
+    
+    var imageUrl: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     override class func description() -> String {
@@ -36,9 +36,14 @@ class PlaylistTableViewCell: UITableViewCell {
             playlistIcon.image = nil
             return
         }
-        playlistIcon.getImage(urlString: imgUrl) { [weak self] (url, image) in
-            if url == imgUrl {
-                self?.playlistIcon.image = image
+        imageUrl = imgUrl
+        ImageDownloadManager.getImage(urlString: imgUrl) { [weak self] (url, image) in
+            DispatchQueue.main.async {
+                if url == imgUrl {
+                    self?.playlistIcon.image = image
+                } else {
+                    self?.playlistIcon.image = nil
+                }
             }
         }
     }
@@ -46,8 +51,10 @@ class PlaylistTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         playlistIcon.image = nil
         playlistName.text = nil
+        ImageDownloadManager.cancelRequestWith(url: imageUrl ?? "")
     }
     
     @IBAction func selectPlaylistBtnClicked(_ sender: UIButton) {
+        print("select playlist button tapped")
     }
 }

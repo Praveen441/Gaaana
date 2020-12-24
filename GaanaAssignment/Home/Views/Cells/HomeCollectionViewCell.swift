@@ -8,9 +8,11 @@
 import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var trackImage: UIImageView!
     @IBOutlet weak var trackName: UILabel!
+    
+    var imageUrl: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,15 +26,21 @@ class HomeCollectionViewCell: UICollectionViewCell {
     func configureCell(trackVM: TrackCellViewModel?) {
         trackName.text = trackVM?.name
         guard let imgURL = trackVM?.imageUrl else {return}
-        trackImage.getImage(urlString: imgURL) { [weak self] (url, image) in
-            if url == imgURL {
-                self?.trackImage.image = image
+        imageUrl = imgURL
+        ImageDownloadManager.getImage(urlString: imgURL) { [weak self] (url, image) in
+            DispatchQueue.main.async {
+                if url == imgURL {
+                    self?.trackImage.image = image
+                } else {
+                    self?.trackImage.image = nil
+                }
             }
         }
     }
-
+    
     override func prepareForReuse() {
         trackName.text = nil
         trackImage.image = nil
+        ImageDownloadManager.cancelRequestWith(url: imageUrl ?? "")
     }
 }
